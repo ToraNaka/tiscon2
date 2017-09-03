@@ -1,6 +1,8 @@
 package net.unit8.sigcolle.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import org.seasar.doma.Entity;
@@ -26,4 +28,18 @@ public class Campaign implements Serializable {
     private Long goal;
 
     private Long createUserId;
+
+    List<Order> orders = new ArrayList<>();
+
+    private Long totalAmount;
+
+    public Campaign() {
+    }
+
+    private Long calcPayments(){
+        for(Order order:orders){
+            totalAmount += order.getAmount();
+        }
+        return totalAmount;
+    }
 }
